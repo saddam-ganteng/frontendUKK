@@ -1,32 +1,41 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div v-if="cek === true">
+    <Sidebar />
+
+    <div class="content-container">
+      <Topbar />
+      <div class="page-content">
+        <div class="container">
+          <router-view />
+        </div>
+      </div>
     </div>
-    <router-view />
+  </div>
+  <div v-else>
+    <Auth />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import Auth from "../src/views/Auth.vue";
+import Sidebar from "../src/components/Sidebar.vue";
+import Topbar from "./components/Topbar.vue";
+export default {
+  components: {
+    Auth,
+    Sidebar,
+    Topbar
+  },
+  computed: {
+    cek() {
+      return this.$store.getters["auth/auth_status"]
+        ? this.$store.getters["auth/auth_status"]
+        : [];
     }
   }
-}
+};
+</script>
+
+<style lang="scss">
+@import "assets/sass/style.vue";
 </style>

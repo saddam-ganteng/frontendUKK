@@ -5,35 +5,35 @@ import Profile from "../views/Profile.vue";
 import Lapor from "../views/Lapor.vue";
 import Auth from "../views/Auth.vue";
 
-import store from "../store/index";
+// import store from "../store/index";
 
 Vue.use(VueRouter);
 
-const isAuthenticated = (to, from, next) => {
-  if (store.getters["auth/auth_status"]) {
-    return next();
-  }
-  return next("/Login");
-};
+// const isAuthenticated = (to, from, next) => {
+//   if (store.getters["auth/auth_status"]) {
+//     return next();
+//   }
+//   return next("/Login");
+// };
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
-    beforeEnter: isAuthenticated
+    component: Home
+    // beforeEnter: isAuthenticated
   },
   {
     path: "/Profile",
     name: "Profile",
-    component: Profile,
-    beforeEnter: isAuthenticated
+    component: Profile
+    // beforeEnter: isAuthenticated
   },
   {
     path: "/Lapor",
     name: "Lapor",
-    component: Lapor,
-    beforeEnter: isAuthenticated
+    component: Lapor
+    // beforeEnter: isAuthenticated
   },
   {
     path: "/Login",

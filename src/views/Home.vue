@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    {{ ceka }}
-    <vue-good-table :columns="columns" :rows="rows">
+    {{ laporan }}
+    <vue-good-table :columns="columns" :rows="laporan">
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
           <b-button
@@ -13,7 +13,7 @@
           <b-button
             class="btn no-wrap mr-1 btn-icon btn-sm"
             variant="light-primary"
-            @click.prevent="deleteReport(props.rows.id)"
+            @click.prevent="deleteLaporan(props.row.id_laporan)"
           >
             <i class="font-size-12 flaticon2-cross"></i>
           </b-button>
@@ -34,13 +34,13 @@ export default {
       columns: [
         {
           label: "Judul",
-          field: "name",
+          field: "judul",
           thClass: "text-center",
           tdClass: "text-center"
         },
         {
           label: "Instansi",
-          field: "age",
+          field: "id_laporan",
           thClass: "text-center",
           tdClass: "text-center",
           width: "350px"
@@ -51,45 +51,6 @@ export default {
           thClass: "text-center",
           tdClass: "text-center",
           width: "150px"
-        }
-      ],
-      rows: [
-        {
-          id: 1,
-          name:
-            "Johnasdqweqweasdasdnasjnas lsandlnoasenjqwn alsndlqnweno nlasdnln owqnd lasldnoq wn",
-          age: 20,
-          score: 0.03343
-        },
-        {
-          id: 2,
-          name: "Jane",
-          age: 24,
-          score: 0.03343
-        },
-        {
-          id: 3,
-          name: "Susan",
-          age: 16,
-          score: 0.03343
-        },
-        {
-          id: 4,
-          name: "Chris",
-          age: 55,
-          score: 0.03343
-        },
-        {
-          id: 5,
-          name: "Dan",
-          age: 40,
-          score: 0.03343
-        },
-        {
-          id: 6,
-          name: "John",
-          age: 20,
-          score: 0.03343
         }
       ]
     };
@@ -109,14 +70,38 @@ export default {
       return this.$store.getters["auth/auth"]
         ? this.$store.getters["auth/auth"]
         : [];
+    },
+    laporan() {
+      return this.$store.getters["laporan/laporan"]
+        ? this.$store.getters["laporan/laporan"]
+        : [];
     }
   },
   mounted() {
     this.getRakyat();
+    this.getLaporan();
   },
   methods: {
     getRakyat() {
       this.$store.dispatch("rakyat/GET_RAKYAT");
+    },
+    getLaporan() {
+      this.$store.dispatch("laporan/GET_LAPORAN");
+    },
+    deleteLaporan(id) {
+      console.log(id);
+      let valid = confirm("Are you sure want to delete this?");
+      if (valid) {
+        this.$store
+          .dispatch("laporan/DELETE_LAPORAN", id)
+          .then(() => {
+            console.log("success");
+            this.getLaporan();
+          })
+          .catch(err => {
+            console.log("Error while deleting laporan", err);
+          });
+      }
     }
   }
 };

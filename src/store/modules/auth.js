@@ -4,7 +4,7 @@ import { LOGIN } from "../../api/auth";
 const state = {
   resp: null,
   auth: null,
-  auth_status: false
+  auth_status: true
 };
 
 const mutations = {
@@ -42,8 +42,8 @@ const actions = {
   },
 
   LOGOUT: ({ commit }) => {
-    localStorage.removeItem("token");
     commit("SET_LOGOUT");
+    localStorage.removeItem("token");
   }
 };
 

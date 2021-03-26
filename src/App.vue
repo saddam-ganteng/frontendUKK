@@ -1,7 +1,6 @@
 <template>
   <div v-if="cek === true">
     <Sidebar />
-
     <div class="content-container">
       <Topbar />
       <div class="page-content">
@@ -12,6 +11,7 @@
     </div>
   </div>
   <div v-else>
+    <Topbar />
     <Auth />
   </div>
 </template>

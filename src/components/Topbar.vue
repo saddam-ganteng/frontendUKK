@@ -1,5 +1,5 @@
 <template>
-  <div v-if="cek == null">
+  <div v-if="cek == false">
     <div class="topbar auth">
       <ul class="topbar__breadcrumb">
         <li class="topbar__breadcrumb__item">
@@ -55,7 +55,7 @@ export default {
     cek() {
       return this.$store.getters["auth/auth_status"]
         ? this.$store.getters["auth/auth_status"]
-        : null;
+        : [];
     },
     currentRouteName() {
       return this.$route.name;

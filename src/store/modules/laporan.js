@@ -6,7 +6,11 @@ import {
   GET_KATEGORI,
   GET_LAPORAN,
   ADD_LAPORAN,
-  DELETE_LAPORAN
+  DELETE_LAPORAN,
+  GET_LAPORAN_NIK,
+  GET_LAPORAN_ID,
+  ADD_TANGGAPAN,
+  GET_TANGGAPAN_ID
 } from "../../api/laporan";
 
 const state = {
@@ -15,7 +19,10 @@ const state = {
   kota: [],
   kecamatan: [],
   kategori: [],
-  laporan: []
+  laporan: [],
+  laporanID: [],
+  laporanNIK: [],
+  tanggapan: []
 };
 
 const mutations = {
@@ -36,6 +43,21 @@ const mutations = {
   },
   SET_LAPORAN: (states, payload) => {
     states.laporan = payload.data;
+  },
+  SET_LAPORAN_ID: (states, payload) => {
+    states.laporanID = payload.data;
+  },
+  SET_LAPORAN_NIK: (states, payload) => {
+    states.laporanNIK = payload.data;
+  },
+  SET_TANGGAPAN_ID: (states, payload) => {
+    if (payload) {
+      // console.log(payload);
+      // console.log("asdsad");
+      states.tanggapan = payload.data;
+    } else {
+      console.log("payload is undefined");
+    }
   }
 };
 
@@ -111,6 +133,36 @@ const actions = {
         }
       });
   },
+  GET_LAPORAN_NIK: async ({ commit }, args) => {
+    return await GET_LAPORAN_NIK(args)
+      .then(resp => {
+        if (resp.status === 200) {
+          // console.log(resp.data);
+          commit("SET_LAPORAN_NIK", resp.data);
+        }
+      })
+      .catch(err => {
+        let resp = err.response;
+        if (resp.status === 404) {
+          commit("SET_LAPORAN_NIK", []);
+        }
+      });
+  },
+  GET_LAPORAN_ID: async ({ commit }, args) => {
+    return await GET_LAPORAN_ID(args)
+      .then(resp => {
+        if (resp.status === 200) {
+          // console.log(resp.data);
+          commit("SET_LAPORAN_ID", resp.data);
+        }
+      })
+      .catch(err => {
+        let resp = err.response;
+        if (resp.status === 404) {
+          commit("SET_LAPORAN_ID", []);
+        }
+      });
+  },
   // eslint-disable-next-line no-unused-vars
   ADD_LAPORAN: async ({ commit }, args) => {
     return await ADD_LAPORAN(args)
@@ -120,6 +172,35 @@ const actions = {
       .catch(err => {
         let resp = err.response;
         console.log(resp);
+      });
+  },
+
+  // eslint-disable-next-line no-unused-vars
+  ADD_TANGGAPAN: async ({ commit }, args) => {
+    return await ADD_TANGGAPAN(args)
+      .then(resp => {
+        console.log(resp);
+      })
+      .catch(err => {
+        let resp = err.response;
+        console.log(resp);
+      });
+  },
+
+  GET_TANGGAPAN_ID: async ({ commit }, id) => {
+    // console.log(id, "ini store");
+    return await GET_TANGGAPAN_ID(id)
+      .then(resp => {
+        if (resp.status === 200) {
+          // console.log(resp.data);
+          commit("SET_TANGGAPAN_ID", resp.data);
+        }
+      })
+      .catch(err => {
+        let resp = err.response;
+        if (resp.status === 404) {
+          commit("SET_TANGGAPAN_ID", []);
+        }
       });
   },
   // eslint-disable-next-line no-unused-vars
@@ -133,7 +214,10 @@ const getters = {
   kota: states => states.kota,
   kecamatan: states => states.kecamatan,
   kategori: states => states.kategori,
-  laporan: states => states.laporan
+  laporan: states => states.laporan,
+  laporanID: states => states.laporanID,
+  laporanNIK: states => states.laporanNIK,
+  tanggapan: states => states.tanggapan
 };
 
 export default {

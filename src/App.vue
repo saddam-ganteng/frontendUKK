@@ -1,5 +1,5 @@
 <template>
-  <div v-if="cek === true">
+  <div v-if="cek == true">
     <Sidebar />
     <div class="content-container">
       <Topbar />
@@ -11,13 +11,13 @@
     </div>
   </div>
   <div v-else>
-    <Topbar />
+    <Topbar v-if="!isAdmin" />
     <Auth />
   </div>
 </template>
 
 <script>
-import Auth from "../src/views/Auth.vue";
+import Auth from "./views/Auth/Auth.vue";
 import Sidebar from "../src/components/Sidebar.vue";
 import Topbar from "./components/Topbar.vue";
 export default {
@@ -31,6 +31,9 @@ export default {
       return this.$store.getters["auth/auth_status"]
         ? this.$store.getters["auth/auth_status"]
         : [];
+    },
+    isAdmin() {
+      return this.$route.name == "AuthAdmin";
     }
   }
 };

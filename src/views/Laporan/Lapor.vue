@@ -113,6 +113,11 @@ export default {
       return this.$store.getters["laporan/kecamatan"]
         ? this.$store.getters["laporan/kecamatan"]
         : [];
+    },
+    auth() {
+      return this.$store.getters["auth/auth"]
+        ? this.$store.getters["auth/auth"]
+        : [];
     }
   },
   methods: {
@@ -142,17 +147,16 @@ export default {
     },
     kirimLapor() {
       const data = {
-        nik: 2222,
+        nik: this.auth.nik,
         judul: this.form.judul,
-        kategori: this.form.provi,
-        provinsi: this.form.kate,
+        kategori: this.form.kate,
+        provinsi: this.form.provi,
         kota: this.form.kot,
         kecamatan: this.form.keca,
         isi_laporan: this.form.isi,
         foto: "asd",
         status: "proses"
       };
-      console.log(data);
       this.$swal
         .fire({
           title: "Apakah Laporan Anda Sudah Benar?",
@@ -162,8 +166,14 @@ export default {
         })
         .then(result => {
           if (result.isConfirmed) {
-            // this.$store.dispatch("laporan/ADD_LAPORAN", data);
-            this.$swal.fire("Terkirim!", "Laporan Anda Sukses", "success");
+            this.$store.dispatch("laporan/ADD_LAPORAN", data).then(() => {
+              this.$store.dispatch("laporan/GET_LAPORAN");
+            });
+            this.$swal
+              .fire("Terkirim!", "Laporan Anda Sukses", "success")
+              .then(() => {
+                this.$router.push({ name: "Home" });
+              });
           }
         });
     }

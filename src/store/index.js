@@ -4,7 +4,7 @@ import auth from "./modules/auth";
 import laporan from "./modules/laporan";
 import rakyat from "./modules/rakyat";
 
-// import createPersistedState from "vuex-persistedstate";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -13,16 +13,15 @@ export default new Vuex.Store({
     auth,
     laporan,
     rakyat
-  }
-  // strict: debug,
-  // plugins: [
-  //   createPersistedState({
-  //     key: "token",
-  //     reducer: state => ({
-  //       auth: state.auth,
-  //       laporan: state.laporan,
-  //       rakyat: state.rakyat
-  //     })
-  //   })
-  // ]
+  },
+  plugins: [
+    createPersistedState({
+      key: "token",
+      reducer: state => ({
+        auth: state.auth,
+        laporan: state.laporan,
+        rakyat: state.rakyat
+      })
+    })
+  ]
 });

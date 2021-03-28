@@ -1,0 +1,150 @@
+<template>
+  <div class="row">
+    {{ laporanID }}
+    {{ tanggapan }}
+    <div class="col-10 mx-auto">
+      <div class="card card-custom gutter-b shadow">
+        <div class="card-body p-0">
+          <div class="row justify-content-center py-8 px-8 py-md-27 px-md-0">
+            <div class="col-md-10">
+              <div
+                class="d-flex justify-content-between pb-5 flex-column flex-md-row"
+              >
+                <h1 class="display-4 font-weight-boldest mb-10">
+                  {{ laporanID.judul }}
+                </h1>
+                <div class="d-flex flex-column align-items-md-end px-0">
+                  <h2 class="text-dark font-weight-bolder mb-8">
+                    {{ laporanID.kategori }}
+                  </h2>
+                  <span
+                    class="d-flex flex-column align-items-md-end opacity-70"
+                  >
+                    <span>
+                      {{ laporanID.kecamatan }}, {{ laporanID.kota }},
+                      {{ laporanID.provinsi }}
+                    </span>
+                    <span>{{ laporanID.status }}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between pb-5">
+                <div class="d-flex flex-column flex-root">
+                  <span>
+                    {{ laporanID.isi_laporan }}
+                  </span>
+                </div>
+              </div>
+              <div class="border-bottom w-100"></div>
+              <div
+                class="mt-4"
+                v-for="item in tanggapan"
+                :key="item.id_tanggapan"
+              >
+                <div class="card card-custom gutter-b shadow">
+                  <div class="card-header">
+                    <div class="card-title">
+                      <h3 class="card-label">
+                        {{ item.id_petugas }}
+                      </h3>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    {{ item.tanggapan }}
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4">
+                <form @submit.prevent="tanggapi">
+                  <div class="card card-custom gutter-b shadow">
+                    <div class="card-body">
+                      <div class="form-group mb-1">
+                        <textarea
+                          class="form-control"
+                          style="resize: none;"
+                          rows="4"
+                          v-model="form.tanggapan"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <button class="btn btn-primary mr-2 float-right">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      form: {
+        tanggapan: ""
+      }
+    };
+  },
+  mounted() {
+    this.getData();
+    // this.getTanggapan();
+    // console.log(this.laporanID.id_laporan, "view");
+    // console.log(this.laporanID.id_laporan);
+    // console.log(this.auth.id_petugas);
+  },
+  computed: {
+    laporanID() {
+      return this.$store.getters["laporan/laporanID"]
+        ? this.$store.getters["laporan/laporanID"]
+        : [];
+    },
+    auth() {
+      return this.$store.getters["auth/auth"]
+        ? this.$store.getters["auth/auth"]
+        : [];
+    },
+    tanggapan() {
+      return this.$store.getters["laporan/tanggapan"]
+        ? this.$store.getters["laporan/tanggapan"]
+        : [];
+    }
+  },
+  methods: {
+    getData() {
+      let id = this.$router.history.current.params.id;
+      this.$store.dispatch("laporan/GET_LAPORAN_ID", id).then(() => {
+        this.$store.dispatch(
+          "laporan/GET_TANGGAPAN_ID",
+          this.laporanID.id_laporan
+        );
+      });
+    },
+    getTanggapan() {
+      this.$store.dispatch(
+        "laporan/GET_TANGGAPAN_ID",
+        this.laporanID.id_laporan
+      );
+    },
+    tanggapi() {
+      const args = {
+        id_laporan: this.laporanID.id_laporan,
+        tanggapan: this.form.tanggapan,
+        id_petugas: this.auth.id_petugas
+      };
+      this.$store.dispatch("laporan/ADD_TANGGAPAN", args).then(() => {
+        this.$store.dispatch(
+          "laporan/GET_TANGGAPAN_ID",
+          this.laporanID.id_laporan
+        );
+      });
+    }
+  }
+};
+</script>

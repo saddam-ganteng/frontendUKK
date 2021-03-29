@@ -8,6 +8,13 @@ import BootstrapVue from "bootstrap-vue";
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
 import { Icon } from "leaflet";
 import VueSweetalert2 from "vue-sweetalert2";
+import VueHtml2Canvas from "vue-html2canvas";
+import VueHtml2pdf from "vue-html2pdf";
+
+import {
+  ValidationProvider,
+  ValidationObserver
+} from "vee-validate/dist/vee-validate.full";
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -26,12 +33,16 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import "vue-good-table/dist/vue-good-table.css";
 import "vue-select/dist/vue-select.css";
 
+Vue.use(VueHtml2pdf);
 Vue.use(VueSweetalert2);
+Vue.use(VueHtml2Canvas);
 Vue.component("v-select", vSelect);
 Vue.component("l-map", LMap);
 Vue.component("l-tile-layer", LTileLayer);
 Vue.component("l-popup", LPopup);
 Vue.component("l-marker", LMarker);
+Vue.component("ValidationProvider", ValidationProvider);
+Vue.component("ValidationObserver", ValidationObserver);
 
 Vue.use(BootstrapVue);
 Vue.use(VueGoodTablePlugin);

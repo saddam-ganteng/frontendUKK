@@ -56,7 +56,6 @@
     </div>
   </div>
   <div v-else class="auth">
-    {{ markerLatLng2 }}
     <l-map
       style="height: 450px"
       :zoom="zoom"
@@ -65,23 +64,14 @@
       @update:zoom="zoomUpdate"
     >
       <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker :lat-lng="markerLatLng">
-        <l-popup>{{ form.username }}</l-popup>
-      </l-marker>
-      <l-marker :lat-lng="markerLatLng1">
-        <l-popup>{{ form.username }}</l-popup>
-      </l-marker>
-      <l-marker :draggable="true" :lat-lng.sync="markerLatLng2">
-        <l-popup>{{ form.username }}</l-popup>
+      <l-marker
+        v-for="(item, index) in location"
+        :key="index"
+        :lat-lng="item.lnglat"
+      >
+        <l-popup>asd</l-popup>
       </l-marker>
     </l-map>
-    <form @submit.prevent="Login" class="text-center">
-      <input type="text" v-model="form.username" />
-      <input type="text" v-model="form.password" />
-      <button class="btn btn-primary" type="sumbit">
-        Login
-      </button>
-    </form>
   </div>
 </template>
 
@@ -89,10 +79,6 @@
 export default {
   data() {
     return {
-      form: {
-        username: "",
-        password: ""
-      },
       formAdmin: {
         username: "",
         password: ""
@@ -100,9 +86,15 @@ export default {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       zoom: 5,
       center: [-2.425057, 117.492186],
-      markerLatLng: [-6.21919546657281, 106.83146319231591],
-      markerLatLng1: [-4.004546023452995, 137.77291718322604],
-      markerLatLng2: [-4.004546023452995, 137.77291718322604],
+      location: [
+        { lnglat: [-7.318882, 108.131832] },
+        { lnglat: [-4.004546023452995, 137.77291718322604] },
+        { lnglat: [-4.004546023452995, 137.77291718322604] },
+        { lnglat: [-1.854168, 120.260741] },
+        { lnglat: [-0.940387, 113.791993] },
+        { lnglat: [-0.166993, 101.416993] },
+        { lnglat: [-3.29408, 128.100586] }
+      ],
       circle: {
         center: [47.41322, -1.0482],
         radius: 4500,
@@ -111,25 +103,6 @@ export default {
     };
   },
   methods: {
-    Login() {
-      this.$store
-        .dispatch("auth/LOGIN", this.form)
-        .then(() => {
-          this.$swal.fire({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            icon: "success",
-            title: "Signed in successfully"
-          });
-          this.$router.push("/");
-        })
-        .catch(error => {
-          this.errors = error.response.data.errors;
-        });
-    },
     LoginAdmin() {
       this.$store
         .dispatch("auth/LOGIN_ADMIN", this.formAdmin)
@@ -167,7 +140,7 @@ export default {
 <style lang="scss">
 .auth {
   position: relative;
-  top: 100px;
+  top: 73px;
 }
 .authadmin {
   height: 100vh !important;

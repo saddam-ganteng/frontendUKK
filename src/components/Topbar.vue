@@ -7,41 +7,29 @@
         </li>
       </ul>
       <div class="topbar__profile">
-        <span
-          class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"
-          >Hi,</span
+        <button
+          @click.prevent="modalLogin()"
+          class="btn font-weight-bolder text-uppercase font-size-lg btn-success py-3 px-6"
         >
-        <span
-          class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"
-          >Admin</span
-        >
+          Sign IN
+        </button>
       </div>
     </div>
+    <Modal />
   </div>
   <div v-else>
     <div class="topbar">
-      <ul class="topbar__breadcrumb">
-        <li class="topbar__breadcrumb__item">
-          <a class="topbar__breadcrumb__link" href="#">{{
-            currentRouteName
-          }}</a>
-        </li>
-      </ul>
       <div class="topbar__profile">
         <div
           id="kt_quick_user_toggle"
           class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
         >
           <span
-            class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"
-            >Hi,</span
-          >
-          <span
-            class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"
-            >Admin</span
+            class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-3"
+            >{{ auth.nama }}</span
           >
           <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-            <span class="symbol-label font-size-h5 font-weight-bold">A</span>
+            <span class="symbol-label font-size-h5 font-weight-bold">N</span>
           </span>
         </div>
       </div>
@@ -50,15 +38,26 @@
 </template>
 
 <script>
+import Modal from "./Modal.vue";
 export default {
+  components: {
+    Modal
+  },
   computed: {
     cek() {
       return this.$store.getters["auth/auth_status"]
         ? this.$store.getters["auth/auth_status"]
         : [];
     },
-    currentRouteName() {
-      return this.$route.name;
+    auth() {
+      return this.$store.getters["auth/auth"]
+        ? this.$store.getters["auth/auth"]
+        : [];
+    }
+  },
+  methods: {
+    modalLogin() {
+      this.$bvModal.show("modal-login");
     }
   }
 };

@@ -1,7 +1,6 @@
 <template>
   <div class="row">
-    {{ laporanID }}
-    {{ tanggapan }}
+    {{ auth }}
     <div class="col-10 mx-auto">
       <div class="card card-custom gutter-b shadow">
         <div class="card-body p-0">
@@ -45,7 +44,7 @@
                   <div class="card-header">
                     <div class="card-title">
                       <h3 class="card-label">
-                        {{ item.id_petugas }}
+                        {{ item.nama_petugas }}
                       </h3>
                     </div>
                   </div>
@@ -54,7 +53,10 @@
                   </div>
                 </div>
               </div>
-              <div class="mt-4">
+              <div
+                class="mt-4"
+                v-if="laporanID.status === 'proses' && auth_level == 2"
+              >
                 <form @submit.prevent="tanggapi">
                   <div class="card card-custom gutter-b shadow">
                     <div class="card-body">
@@ -69,11 +71,21 @@
                     </div>
                     <div class="card-footer">
                       <button class="btn btn-primary mr-2 float-right">
-                        Submit
+                        Kirim
                       </button>
                     </div>
                   </div>
                 </form>
+                <button @click="laporSelesai" class="btn btn-info float-right">
+                  Selesai
+                </button>
+              </div>
+              <div v-else>
+                <!-- <button
+                  class="btn font-weight-bolder text-uppercase font-size-lg btn-success py-3 px-6 float-right"
+                >
+                  Cetak Laporan
+                </button> -->
               </div>
             </div>
           </div>
@@ -94,10 +106,6 @@ export default {
   },
   mounted() {
     this.getData();
-    // this.getTanggapan();
-    // console.log(this.laporanID.id_laporan, "view");
-    // console.log(this.laporanID.id_laporan);
-    // console.log(this.auth.id_petugas);
   },
   computed: {
     laporanID() {
@@ -113,6 +121,11 @@ export default {
     tanggapan() {
       return this.$store.getters["laporan/tanggapan"]
         ? this.$store.getters["laporan/tanggapan"]
+        : [];
+    },
+    auth_level() {
+      return this.$store.getters["auth/auth_level"]
+        ? this.$store.getters["auth/auth_level"]
         : [];
     }
   },
@@ -136,14 +149,26 @@ export default {
       const args = {
         id_laporan: this.laporanID.id_laporan,
         tanggapan: this.form.tanggapan,
-        id_petugas: this.auth.id_petugas
+        id_petugas: this.auth.id_petugas,
+        nama_petugas: this.auth.nama_petugas
       };
       this.$store.dispatch("laporan/ADD_TANGGAPAN", args).then(() => {
         this.$store.dispatch(
           "laporan/GET_TANGGAPAN_ID",
           this.laporanID.id_laporan
         );
+        this.form.tanggapan = "";
       });
+    },
+    laporSelesai() {
+      let id = this.laporanID.id_laporan;
+      this.$store.dispatch("laporan/DONE_LAPORAN", id).then(() =>
+        this.$swal
+          .fire("Selesai!", "Laporan Telah Terselesaikan", "success")
+          .then(() => {
+            this.$router.push({ name: "Home" });
+          })
+      );
     }
   }
 };

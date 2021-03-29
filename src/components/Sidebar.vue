@@ -7,19 +7,31 @@
       <li id="sidebar-tooltip-channels" class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toHomeAdmin()">
           <i class="fas fa-database sidebar__menu__icon"></i>
-          <span class="sidebar__menu__text">Laporan</span>
+          <span class="sidebar__menu__text">Home</span>
         </a>
       </li>
-      <li id="sidebar-tooltip-snapshot" class="sidebar__menu__item">
+      <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toProfile()">
           <i class="fas fa-user-alt sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Profile</span>
         </a>
       </li>
-      <li id="sidebar-tooltip-snapshot" class="sidebar__menu__item">
-        <a class="sidebar__menu__link" @click="toLapor()">
+      <li class="sidebar__menu__item">
+        <a class="sidebar__menu__link" @click="toLaporKu()">
           <i class="fas fa-envelope sidebar__menu__icon"></i>
-          <span class="sidebar__menu__text">Lapor</span>
+          <span class="sidebar__menu__text">Laporan</span>
+        </a>
+      </li>
+      <li class="sidebar__menu__item">
+        <a class="sidebar__menu__link" @click="toPetugas()">
+          <i class="fas fa-envelope sidebar__menu__icon"></i>
+          <span class="sidebar__menu__text">Petugas</span>
+        </a>
+      </li>
+      <li class="sidebar__menu__item">
+        <a class="sidebar__menu__link" @click="toMasyarakat()">
+          <i class="fas fa-envelope sidebar__menu__icon"></i>
+          <span class="sidebar__menu__text">Masyarakat</span>
         </a>
       </li>
     </ul>
@@ -39,19 +51,25 @@
       <li id="sidebar-tooltip-channels" class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toHome()">
           <i class="fas fa-database sidebar__menu__icon"></i>
-          <span class="sidebar__menu__text">Database</span>
+          <span class="sidebar__menu__text">Home</span>
         </a>
       </li>
-      <li id="sidebar-tooltip-snapshot" class="sidebar__menu__item">
+      <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toProfile()">
           <i class="fas fa-user-alt sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Profile</span>
         </a>
       </li>
-      <li id="sidebar-tooltip-snapshot" class="sidebar__menu__item">
+      <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toLapor()">
           <i class="fas fa-envelope sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Lapor</span>
+        </a>
+      </li>
+      <li class="sidebar__menu__item">
+        <a class="sidebar__menu__link" @click="toLaporKu()">
+          <i class="fas fa-envelope-open-text sidebar__menu__icon"></i>
+          <span class="sidebar__menu__text">Laporan Ku</span>
         </a>
       </li>
     </ul>
@@ -86,6 +104,15 @@ export default {
     },
     toLapor() {
       this.$router.push({ name: "Lapor" });
+    },
+    toLaporKu() {
+      this.$router.push({ name: "LaporKu" });
+    },
+    toPetugas() {
+      this.$router.push({ name: "Petugas" });
+    },
+    toMasyarakat() {
+      this.$router.push({ name: "Masyarakat" });
     },
     Logout() {
       this.$store.dispatch("auth/LOGOUT");

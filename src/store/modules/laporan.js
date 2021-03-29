@@ -10,7 +10,8 @@ import {
   GET_LAPORAN_NIK,
   GET_LAPORAN_ID,
   ADD_TANGGAPAN,
-  GET_TANGGAPAN_ID
+  GET_TANGGAPAN_ID,
+  DONE_LAPORAN
 } from "../../api/laporan";
 
 const state = {
@@ -166,6 +167,18 @@ const actions = {
   // eslint-disable-next-line no-unused-vars
   ADD_LAPORAN: async ({ commit }, args) => {
     return await ADD_LAPORAN(args)
+      .then(resp => {
+        console.log(resp);
+      })
+      .catch(err => {
+        let resp = err.response;
+        console.log(resp);
+      });
+  },
+
+  // eslint-disable-next-line no-unused-vars
+  DONE_LAPORAN: async ({ commit }, args) => {
+    return await DONE_LAPORAN(args)
       .then(resp => {
         console.log(resp);
       })

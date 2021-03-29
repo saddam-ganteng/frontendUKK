@@ -8,3 +8,7 @@ export const LOGIN = body => {
 export const LOGIN_ADMIN = body => {
   return axios.post("/api/login/petugas", body);
 };
+
+export const REGISTER_RAKYAT = body => {
+  return axios.post("/api/register/masyarakat", body);
+};

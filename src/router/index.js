@@ -4,7 +4,10 @@ import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Lapor from "../views/Laporan/Lapor.vue";
 import LaporView from "../views/Laporan/LaporView.vue";
+import LaporKu from "../views/Laporan/LaporKu.vue";
 import Auth from "../views/Auth/Auth.vue";
+import Petugas from "../views/Petugas.vue";
+import Masyarakat from "../views/Masyarakat.vue";
 
 import store from "../store/index";
 
@@ -37,6 +40,18 @@ const routes = [
     beforeEnter: isAuthenticated
   },
   {
+    path: "/Petugas",
+    name: "Petugas",
+    component: Petugas,
+    beforeEnter: isAuthenticated
+  },
+  {
+    path: "/Masyarakat",
+    name: "Masyarakat",
+    component: Masyarakat,
+    beforeEnter: isAuthenticated
+  },
+  {
     path: "/Lapor",
     name: "Lapor",
     component: Lapor,
@@ -46,6 +61,12 @@ const routes = [
     path: "/Lapor/view/:id",
     name: "LaporView",
     component: LaporView,
+    beforeEnter: isAuthenticated
+  },
+  {
+    path: "/Lapor/Ku",
+    name: "LaporKu",
+    component: LaporKu,
     beforeEnter: isAuthenticated
   },
   {

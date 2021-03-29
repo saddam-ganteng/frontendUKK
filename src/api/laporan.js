@@ -35,6 +35,10 @@ export const ADD_LAPORAN = body => {
   return axios.post("/api/lapor", body);
 };
 
+export const DONE_LAPORAN = id => {
+  return axios.put(`/api/lapor/${id}/selesai`);
+};
+
 export const DELETE_LAPORAN = id => {
   return axios.delete(`/api/lapor/${id}`);
 };

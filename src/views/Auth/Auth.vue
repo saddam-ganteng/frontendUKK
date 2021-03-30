@@ -57,21 +57,33 @@
   </div>
   <div v-else class="auth">
     <l-map
-      style="height: 450px"
+      style="height: 647px"
       :zoom="zoom"
       :center="center"
       @update:center="centerUpdate"
       @update:zoom="zoomUpdate"
     >
       <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker
-        v-for="(item, index) in location"
-        :key="index"
-        :lat-lng="item.lnglat"
-      >
-        <l-popup>asd</l-popup>
+      <l-marker :lat-lng.sync="lnglatJakarta">
+        <l-popup>Laporan Di Jakarta Sebanyak</l-popup>
+      </l-marker>
+      <l-marker :lat-lng.sync="lnglatAceh">
+        <l-popup>Laporan Di Aceh Sebanyak</l-popup>
+      </l-marker>
+      <l-marker :lat-lng.sync="lnglatBali">
+        <l-popup>Laporan Di Bali Sebanyak</l-popup>
+      </l-marker>
+      <l-marker :lat-lng.sync="lnglatSulawesi">
+        <l-popup>Laporan Di Sulawesi Sebanyak</l-popup>
+      </l-marker>
+      <l-marker :lat-lng.sync="lnglatYogyakarta">
+        <l-popup>Laporan Di Yogyakarta Sebanyak</l-popup>
+      </l-marker>
+      <l-marker :lat-lng.sync="lnglatPapua" :draggable="true">
+        <l-popup>Laporan Di Papua Sebanyak</l-popup>
       </l-marker>
     </l-map>
+    {{ lnglatPapua }}
   </div>
 </template>
 
@@ -86,20 +98,12 @@ export default {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       zoom: 5,
       center: [-2.425057, 117.492186],
-      location: [
-        { lnglat: [-7.318882, 108.131832] },
-        { lnglat: [-4.004546023452995, 137.77291718322604] },
-        { lnglat: [-4.004546023452995, 137.77291718322604] },
-        { lnglat: [-1.854168, 120.260741] },
-        { lnglat: [-0.940387, 113.791993] },
-        { lnglat: [-0.166993, 101.416993] },
-        { lnglat: [-3.29408, 128.100586] }
-      ],
-      circle: {
-        center: [47.41322, -1.0482],
-        radius: 4500,
-        color: "red"
-      }
+      lnglatJakarta: [-6.206717, 106.83161],
+      lnglatAceh: [5.493519, 95.370117],
+      lnglatBali: [-8.411515, 115.233399],
+      lnglatSulawesi: [-2.249422, 120.251952],
+      lnglatYogyakarta: [-7.839438, 110.338989],
+      lnglatPapua: [-4.311356, 138.01465]
     };
   },
   methods: {
@@ -132,7 +136,15 @@ export default {
   computed: {
     isAdmin() {
       return this.$route.name == "AuthAdmin";
+    },
+    bali() {
+      return this.$store.getters["laporan/bali"]
+        ? this.$store.getters["laporan/bali"]
+        : [];
     }
+  },
+  mounted() {
+    this.$store.dispatch("laporan/GET_LAPORAN_BALI");
   }
 };
 </script>

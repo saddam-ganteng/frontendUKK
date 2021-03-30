@@ -11,7 +11,13 @@ import {
   GET_LAPORAN_ID,
   ADD_TANGGAPAN,
   GET_TANGGAPAN_ID,
-  DONE_LAPORAN
+  DONE_LAPORAN,
+  GET_LAPORAN_JAKARTA,
+  GET_LAPORAN_BALI,
+  GET_LAPORAN_ACEH,
+  GET_LAPORAN_YOGYAKARTA,
+  GET_LAPORAN_PAPUA,
+  GET_LAPORAN_SULAWESI
 } from "../../api/laporan";
 
 const state = {
@@ -23,7 +29,13 @@ const state = {
   laporan: [],
   laporanID: [],
   laporanNIK: [],
-  tanggapan: []
+  tanggapan: [],
+  jakarta: [],
+  bali: [],
+  sulawesi: [],
+  papua: [],
+  aceh: [],
+  yogyakarta: []
 };
 
 const mutations = {
@@ -59,6 +71,24 @@ const mutations = {
     } else {
       console.log("payload is undefined");
     }
+  },
+  SET_LAPORAN_JAKARTA: (states, payload) => {
+    states.jakarta = payload.data;
+  },
+  SET_LAPORAN_BALI: (states, payload) => {
+    states.bali = payload.data;
+  },
+  SET_LAPORAN_ACEH: (states, payload) => {
+    states.aceh = payload.data;
+  },
+  SET_LAPORAN_YOGYAKARTA: (states, payload) => {
+    states.yogyakarta = payload.data;
+  },
+  SET_LAPORAN_PAPUA: (states, payload) => {
+    states.papua = payload.data;
+  },
+  SET_LAPORAN_SULAWESI: (states, payload) => {
+    states.sulawesi = payload.data;
   }
 };
 
@@ -219,6 +249,91 @@ const actions = {
   // eslint-disable-next-line no-unused-vars
   DELETE_LAPORAN: ({ commit }, args) => {
     return DELETE_LAPORAN(args);
+  },
+
+  GET_LAPORAN_JAKARTA: async ({ commit }) => {
+    return await GET_LAPORAN_JAKARTA()
+      .then(resp => {
+        if (resp.status === 200) {
+          commit("SET_LAPORAN_JAKARTA", resp.data);
+        }
+      })
+      .catch(err => {
+        let resp = err.response;
+        if (resp === 404) {
+          commit("SET_LAPORAN_JAKARTA", []);
+        }
+      });
+  },
+  GET_LAPORAN_BALI: async ({ commit }) => {
+    return await GET_LAPORAN_BALI()
+      .then(resp => {
+        if (resp.status === 200) {
+          commit("SET_LAPORAN_BALI", resp.data);
+        }
+      })
+      .catch(err => {
+        let resp = err.response;
+        if (resp === 404) {
+          commit("SET_LAPORAN_BALI", []);
+        }
+      });
+  },
+  GET_LAPORAN_ACEH: async ({ commit }) => {
+    return await GET_LAPORAN_ACEH()
+      .then(resp => {
+        if (resp.status === 200) {
+          commit("SET_LAPORAN_ACEH", resp.data);
+        }
+      })
+      .catch(err => {
+        let resp = err.response;
+        if (resp === 404) {
+          commit("SET_LAPORAN_ACEH", []);
+        }
+      });
+  },
+  GET_LAPORAN_YOGYAKARTA: async ({ commit }) => {
+    return await GET_LAPORAN_YOGYAKARTA()
+      .then(resp => {
+        if (resp.status === 200) {
+          commit("SET_LAPORAN_YOGYAKARTA", resp.data);
+        }
+      })
+      .catch(err => {
+        let resp = err.response;
+        if (resp === 404) {
+          commit("SET_LAPORAN_YOGYAKARTA", []);
+        }
+      });
+  },
+  GET_LAPORAN_PAPUA: async ({ commit }) => {
+    return await GET_LAPORAN_PAPUA()
+      .then(resp => {
+        if (resp.status === 200) {
+          commit("SET_LAPORAN_PAPUA", resp.data);
+        }
+      })
+      .catch(err => {
+        let resp = err.response;
+        if (resp === 404) {
+          commit("SET_LAPORAN_PAPUA", []);
+        }
+      });
+  },
+  GET_LAPORAN_SULAWESI: async ({ commit }) => {
+    return await GET_LAPORAN_SULAWESI()
+      .then(resp => {
+        if (resp.status === 200) {
+          commit("SET_LAPORAN_SULAWESI", resp.data);
+        }
+      })
+      .catch(err => {
+        let resp = err.response;
+        if (resp === 404) {
+          commit("SET_LAPORAN_SULAWESI", []);
+        }
+      });
   }
 };
 
@@ -230,7 +345,13 @@ const getters = {
   laporan: states => states.laporan,
   laporanID: states => states.laporanID,
   laporanNIK: states => states.laporanNIK,
-  tanggapan: states => states.tanggapan
+  tanggapan: states => states.tanggapan,
+  jakarta: states => states.jakarta,
+  bali: states => states.bali,
+  sulawesi: states => states.sulawesi,
+  papua: states => states.papua,
+  aceh: states => states.aceh,
+  yogyakarta: states => states.yogyakarta
 };
 
 export default {

@@ -31,6 +31,25 @@ export const GET_LAPORAN_ID = id => {
   return axios.get(`/api/lapor/id/${id}`);
 };
 
+export const GET_LAPORAN_JAKARTA = () => {
+  return axios.get(`/api/lapor/jakarta`);
+};
+export const GET_LAPORAN_BALI = () => {
+  return axios.get(`/api/get/laporan/bali`);
+};
+export const GET_LAPORAN_ACEH = () => {
+  return axios.get(`/api/get/laporan/aceh`);
+};
+export const GET_LAPORAN_YOGYAKARTA = () => {
+  return axios.get(`/api/get/laporan/yogyakarta`);
+};
+export const GET_LAPORAN_PAPUA = () => {
+  return axios.get(`/api/get/laporan/papua`);
+};
+export const GET_LAPORAN_SULAWESI = () => {
+  return axios.get(`/api/get/laporan/sulawesi`);
+};
+
 export const ADD_LAPORAN = body => {
   return axios.post("/api/lapor", body);
 };

@@ -1,6 +1,5 @@
 <template>
   <div class="row">
-    {{ auth }}
     <div class="col-10 mx-auto">
       <div class="card card-custom gutter-b shadow">
         <div class="card-body p-0">

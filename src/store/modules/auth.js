@@ -4,7 +4,7 @@ import { LOGIN, LOGIN_ADMIN, REGISTER_RAKYAT } from "../../api/auth";
 const state = {
   resp: null,
   auth: null,
-  auth_status: false,
+  auth_status: true,
   auth_level: null
 };
 

@@ -20,7 +20,12 @@
         </span>
       </template>
     </vue-good-table>
-    <button @click="exportPDF()">Print</button>
+    <button
+      class="float-right btn font-weight-bolder text-uppercase font-size-lg btn-success py-3 px-6 mt-3"
+      @click="exportPDF()"
+    >
+      Print
+    </button>
   </div>
   <div v-else>
     <vue-good-table :columns="columns" :rows="laporanNIK">

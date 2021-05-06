@@ -4,9 +4,7 @@
     <div class="content-container">
       <Topbar />
       <div class="page-content">
-        <div class="container">
-          <router-view />
-        </div>
+        <router-view />
       </div>
     </div>
   </div>

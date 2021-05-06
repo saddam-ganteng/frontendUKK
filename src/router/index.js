@@ -2,9 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
-import Lapor from "../views/Laporan/Lapor.vue";
-import LaporView from "../views/Laporan/LaporView.vue";
-import LaporKu from "../views/Laporan/LaporKu.vue";
+import Lapor from "../views/Barang/Lapor.vue";
+import LaporView from "../views/Barang/LaporView.vue";
+import LaporKu from "../views/Barang/LaporKu.vue";
 import Auth from "../views/Auth/Auth.vue";
 import Petugas from "../views/Petugas.vue";
 import Masyarakat from "../views/Masyarakat.vue";
@@ -96,7 +96,8 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
+  linkExactActiveClass: "active"
 });
 
 export default router;

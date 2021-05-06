@@ -10,12 +10,12 @@
           <span class="sidebar__menu__text">Home</span>
         </a>
       </li>
-      <li class="sidebar__menu__item">
+      <!-- <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toProfile()">
           <i class="fas fa-user-alt sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Profile</span>
         </a>
-      </li>
+      </li> -->
       <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toLaporKu()">
           <i class="fas fa-envelope sidebar__menu__icon"></i>
@@ -48,29 +48,29 @@
       NGADS
     </div>
     <ul class="sidebar__menu">
-      <li id="sidebar-tooltip-channels" class="sidebar__menu__item">
-        <a class="sidebar__menu__link" @click="toHome()">
+      <li class="sidebar__menu__item">
+        <router-link class="sidebar__menu__link" to="/">
           <i class="fas fa-database sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Home</span>
-        </a>
+        </router-link>
       </li>
-      <li class="sidebar__menu__item">
+      <!-- <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toProfile()">
           <i class="fas fa-user-alt sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Profile</span>
         </a>
-      </li>
+      </li> -->
       <li class="sidebar__menu__item">
-        <a class="sidebar__menu__link" @click="toLapor()">
+        <router-link class="sidebar__menu__link" to="/Lapor">
           <i class="fas fa-envelope sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Lapor</span>
-        </a>
+        </router-link>
       </li>
       <li class="sidebar__menu__item">
-        <a class="sidebar__menu__link" @click="toLaporKu()">
+        <router-link class="sidebar__menu__link" to="/Lapor/Ku">
           <i class="fas fa-envelope-open-text sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Laporan Ku</span>
-        </a>
+        </router-link>
       </li>
     </ul>
     <ul class="sidebar__menu sidebar__menu--secondary">
@@ -120,3 +120,12 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.active {
+  .sidebar__menu__icon {
+    color: #3699ff;
+  }
+  background: #1b1b28;
+}
+</style>

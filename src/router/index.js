@@ -1,13 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Profile from "../views/Profile.vue";
-import Lapor from "../views/Barang/Lapor.vue";
-import LaporView from "../views/Barang/LaporView.vue";
-import LaporKu from "../views/Barang/LaporKu.vue";
 import Auth from "../views/Auth/Auth.vue";
-import Petugas from "../views/Petugas.vue";
-import Masyarakat from "../views/Masyarakat.vue";
+
+import Barang from "../views/Barang/Barang.vue";
+import Kirim from "../views/Barang/Transfer/Kirim.vue";
+import Adjusment from "../views/Barang/Adjusment/Adjusment.vue";
 
 import store from "../store/index";
 
@@ -17,7 +15,7 @@ const isAuthenticated = (to, from, next) => {
   if (store.getters["auth/auth_status"]) {
     return next();
   }
-  return next("/Login");
+  return next("/Admin/Login");
 };
 
 const routes = [
@@ -34,39 +32,21 @@ const routes = [
     beforeEnter: isAuthenticated
   },
   {
-    path: "/Profile",
-    name: "Profile",
-    component: Profile,
+    path: "/Barang",
+    name: "Barang",
+    component: Barang,
     beforeEnter: isAuthenticated
   },
   {
-    path: "/Petugas",
-    name: "Petugas",
-    component: Petugas,
+    path: "/Barang/Kirim",
+    name: "Kirim",
+    component: Kirim,
     beforeEnter: isAuthenticated
   },
   {
-    path: "/Masyarakat",
-    name: "Masyarakat",
-    component: Masyarakat,
-    beforeEnter: isAuthenticated
-  },
-  {
-    path: "/Lapor",
-    name: "Lapor",
-    component: Lapor,
-    beforeEnter: isAuthenticated
-  },
-  {
-    path: "/Lapor/view/:id",
-    name: "LaporView",
-    component: LaporView,
-    beforeEnter: isAuthenticated
-  },
-  {
-    path: "/Lapor/Ku",
-    name: "LaporKu",
-    component: LaporKu,
+    path: "/Barang/Adjusment",
+    name: "Adjusment",
+    component: Adjusment,
     beforeEnter: isAuthenticated
   },
   {

@@ -54,7 +54,7 @@ window.axios = require("axios");
 window.queryString = require("query-string");
 
 // Setup API Endpoint
-window.axios.defaults.baseURL = "http://localhost:8000";
+window.axios.defaults.baseURL = "http://localhost:3030";
 // Setup axios post content type
 window.axios.defaults.headers.post["Content-Type"] =
   "multipart/form-data; boundary=<calculated when request is sent>";

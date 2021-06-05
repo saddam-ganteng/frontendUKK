@@ -4,7 +4,9 @@
     <div class="content-container">
       <Topbar />
       <div class="page-content">
-        <router-view />
+        <transition name="fade-in-up">
+          <router-view />
+        </transition>
       </div>
     </div>
   </div>

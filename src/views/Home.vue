@@ -528,7 +528,7 @@
         class="card-body d-flex justify-content-center flex-column col-lg-6 px-8 py-20 px-lg-20 py-lg-40"
       >
         <h2 class="text-dark font-weight-bolder mb-8 py-7 px-8">
-          ASd asd
+          nanoSTIX Indonesia
         </h2>
       </div>
     </div>

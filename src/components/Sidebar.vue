@@ -61,9 +61,9 @@
         </a>
       </li> -->
       <li class="sidebar__menu__item">
-        <router-link class="sidebar__menu__link" to="/Lapor">
+        <router-link class="sidebar__menu__link" to="/Barang">
           <i class="fas fa-envelope sidebar__menu__icon"></i>
-          <span class="sidebar__menu__text">Lapor</span>
+          <span class="sidebar__menu__text">Barang</span>
         </router-link>
       </li>
       <li class="sidebar__menu__item">
@@ -123,9 +123,18 @@ export default {
 
 <style lang="scss">
 .active {
-  .sidebar__menu__icon {
-    color: #3699ff;
+  .sidebar {
+    &__menu {
+      &__icon {
+        color: #3699ff;
+      }
+
+      &__text {
+        color: white;
+      }
+    }
   }
+
   background: #1b1b28;
 }
 </style>

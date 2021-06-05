@@ -1,25 +1,35 @@
 <template>
-  <div v-if="isAdmin" class="row no-gutters authadmin">
-    <div class="col-4 bg-dark"></div>
-    <div class="col-8">
-      <div class="row no-gutters h-100">
-        <div class="col-5 mx-auto my-auto">
+  <div class="row no-gutters authadmin">
+    <div class="col-12 col-xl-4 bg-dark d-flex align-content-between flex-wrap">
+      <div class="mx-auto my-auto title">
+        <h2 class="text-light font-weight-bolder">DMARE</h2>
+      </div>
+      <div class="banner">
+        <img src="@/assets/banner.png" alt="" />
+      </div>
+    </div>
+    <div class="col-12 col-xl-8 d-flex flex-column form-login">
+      <div class="row my-auto no-gutters">
+        <div class="col-12 col-xl-7 mx-auto">
           <div class="card p-5 rounded shadow">
             <form @submit.prevent="LoginAdmin">
               <div class="login-form login-signin py-11">
-                <div class="text-center pb-8">
+                <div class="pb-8">
                   <h2
                     class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg"
                   >
-                    Sign In
+                    Welcome to DMARE
                   </h2>
+                  <span class="text-muted font-weight-bold font-size-h6">
+                    New Here? <a href="#">Create an Account</a>
+                  </span>
                 </div>
                 <div class="form-group">
                   <label class="font-size-h6 font-weight-bolder text-dark"
                     >Username</label
                   >
                   <input
-                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
+                    class="form-control form-control-solid h-auto py-3 px-4 rounded-xl"
                     type="text"
                     name="username"
                     autocomplete="off"
@@ -27,24 +37,19 @@
                   />
                 </div>
                 <div class="form-group">
-                  <div class="d-flex justify-content-between mt-n5">
-                    <label
-                      class="font-size-h6 font-weight-bolder text-dark pt-5"
-                      >Password</label
-                    >
-                  </div>
+                  <label class="font-size-h6 font-weight-bolder text-dark"
+                    >Password</label
+                  >
                   <input
-                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
+                    class="form-control form-control-solid h-auto py-3 px-4 rounded-xl"
                     type="password"
                     name="password"
                     autocomplete="off"
                     v-model="formAdmin.password"
                   />
                 </div>
-                <div class="text-center pt-2">
-                  <button
-                    class="btn btn-dark font-weight-bolder font-size-h6 px-8 py-4 my-3"
-                  >
+                <div class="pt-2">
+                  <button class="btn btn-primary font-weight-bolder px-4 py-3">
                     Sign In
                   </button>
                 </div>
@@ -53,36 +58,24 @@
           </div>
         </div>
       </div>
+      <div class="row pt-auto no-gutters">
+        <div class="col-3 offset-2 offset-xl-3 pl-4 pb-3">
+          <span class="text-muted font-weight-bolder">
+            2021© DMARE
+          </span>
+        </div>
+        <div class="col-2 pl-4 pb-3">
+          <span class="text-muted font-weight-bolder">
+            Terms
+          </span>
+        </div>
+        <div class="col-2 pl-4 pb-3">
+          <span class="text-muted font-weight-bolder">
+            Contact Us
+          </span>
+        </div>
+      </div>
     </div>
-  </div>
-  <div v-else class="auth">
-    <l-map
-      style="height: 647px"
-      :zoom="zoom"
-      :center="center"
-      @update:center="centerUpdate"
-      @update:zoom="zoomUpdate"
-    >
-      <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker :lat-lng.sync="lnglatJakarta">
-        <l-popup>Laporan Di Jakarta Sebanyak {{ jakarta }}</l-popup>
-      </l-marker>
-      <l-marker :lat-lng.sync="lnglatAceh">
-        <l-popup>Laporan Di Aceh Sebanyak {{ aceh }}</l-popup>
-      </l-marker>
-      <l-marker :lat-lng.sync="lnglatBali">
-        <l-popup>Laporan Di Bali Sebanyak {{ bali }}</l-popup>
-      </l-marker>
-      <l-marker :lat-lng.sync="lnglatSulawesi">
-        <l-popup>Laporan Di Sulawesi Sebanyak {{ sulawesi }}</l-popup>
-      </l-marker>
-      <l-marker :lat-lng.sync="lnglatYogyakarta">
-        <l-popup>Laporan Di Yogyakarta Sebanyak {{ yogyakarta }}</l-popup>
-      </l-marker>
-      <l-marker :lat-lng.sync="lnglatPapua" :draggable="true">
-        <l-popup>Laporan Di Papua Sebanyak {{ papua }}</l-popup>
-      </l-marker>
-    </l-map>
   </div>
 </template>
 
@@ -174,11 +167,20 @@ export default {
 </script>
 
 <style lang="scss">
-.auth {
-  position: relative;
-  top: 73px;
-}
 .authadmin {
   height: 100vh !important;
+}
+
+.form-login {
+  height: 100%;
+}
+
+.title {
+  padding-top: 5rem;
+}
+
+.banner img {
+  height: auto;
+  width: 100%;
 }
 </style>

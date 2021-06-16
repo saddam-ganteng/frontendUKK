@@ -118,11 +118,9 @@
               </ValidationProvider>
             </div>
             <div class="form-group">
-              <div class="d-flex justify-content-between mt-n5">
-                <label class="font-size-h6 font-weight-bolder text-dark pt-5"
-                  >Password</label
-                >
-              </div>
+              <label class="font-size-h6 font-weight-bolder text-dark"
+                >Password</label
+              >
               <ValidationProvider
                 name="Password"
                 rules="required"

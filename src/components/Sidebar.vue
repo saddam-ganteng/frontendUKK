@@ -10,12 +10,12 @@
           <span class="sidebar__menu__text">Home</span>
         </a>
       </li>
-      <li class="sidebar__menu__item">
+      <!-- <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toProfile()">
           <i class="fas fa-user-alt sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Profile</span>
         </a>
-      </li>
+      </li> -->
       <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toLaporKu()">
           <i class="fas fa-envelope sidebar__menu__icon"></i>
@@ -54,12 +54,12 @@
           <span class="sidebar__menu__text">Home</span>
         </a>
       </li>
-      <li class="sidebar__menu__item">
+      <!-- <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toProfile()">
           <i class="fas fa-user-alt sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Profile</span>
         </a>
-      </li>
+      </li> -->
       <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toLapor()">
           <i class="fas fa-envelope sidebar__menu__icon"></i>

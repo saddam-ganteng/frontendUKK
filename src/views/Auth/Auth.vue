@@ -65,25 +65,24 @@
     >
       <l-tile-layer :url="url"></l-tile-layer>
       <l-marker :lat-lng.sync="lnglatJakarta">
-        <l-popup>Laporan Di Jakarta Sebanyak</l-popup>
+        <l-popup>Laporan Di Jakarta Sebanyak {{ jakarta }}</l-popup>
       </l-marker>
       <l-marker :lat-lng.sync="lnglatAceh">
-        <l-popup>Laporan Di Aceh Sebanyak</l-popup>
+        <l-popup>Laporan Di Aceh Sebanyak {{ aceh }}</l-popup>
       </l-marker>
       <l-marker :lat-lng.sync="lnglatBali">
-        <l-popup>Laporan Di Bali Sebanyak</l-popup>
+        <l-popup>Laporan Di Bali Sebanyak {{ bali }}</l-popup>
       </l-marker>
       <l-marker :lat-lng.sync="lnglatSulawesi">
-        <l-popup>Laporan Di Sulawesi Sebanyak</l-popup>
+        <l-popup>Laporan Di Sulawesi Sebanyak {{ sulawesi }}</l-popup>
       </l-marker>
       <l-marker :lat-lng.sync="lnglatYogyakarta">
-        <l-popup>Laporan Di Yogyakarta Sebanyak</l-popup>
+        <l-popup>Laporan Di Yogyakarta Sebanyak {{ yogyakarta }}</l-popup>
       </l-marker>
       <l-marker :lat-lng.sync="lnglatPapua" :draggable="true">
-        <l-popup>Laporan Di Papua Sebanyak</l-popup>
+        <l-popup>Laporan Di Papua Sebanyak {{ papua }}</l-popup>
       </l-marker>
     </l-map>
-    {{ lnglatPapua }}
   </div>
 </template>
 
@@ -140,7 +139,32 @@ export default {
     bali() {
       return this.$store.getters["laporan/bali"]
         ? this.$store.getters["laporan/bali"]
-        : [];
+        : 0;
+    },
+    jakarta() {
+      return this.$store.getters["laporan/jakarta"]
+        ? this.$store.getters["laporan/jakarta"]
+        : 0;
+    },
+    aceh() {
+      return this.$store.getters["laporan/aceh"]
+        ? this.$store.getters["laporan/aceh"]
+        : 0;
+    },
+    papua() {
+      return this.$store.getters["laporan/papua"]
+        ? this.$store.getters["laporan/papua"]
+        : 0;
+    },
+    sulawesi() {
+      return this.$store.getters["laporan/sulawesi"]
+        ? this.$store.getters["laporan/sulawesi"]
+        : 0;
+    },
+    yogyakarta() {
+      return this.$store.getters["laporan/yogyakarta"]
+        ? this.$store.getters["laporan/yogyakarta"]
+        : 0;
     }
   },
   mounted() {

@@ -8,9 +8,13 @@
             variant="light-primary"
             @click.prevent="toAcceptAdmin(props.row.id_laporan)"
           >
-            <i class="font-size-12 fas fa-check"></i>
+            <i
+              class="font-size-12"
+              :class="auth.status == 'selesai' ? 'fas fa-check' : 'fas fa-eye'"
+            />
           </b-button>
           <b-button
+            v-if="props.row.status === 'proses'"
             class="btn no-wrap mr-1 btn-icon btn-sm"
             variant="light-primary"
             @click.prevent="deleteLaporan(props.row.id_laporan)"
@@ -20,7 +24,18 @@
         </span>
       </template>
     </vue-good-table>
-    <button @click="exportPDF()">Print</button>
+    <button
+      class="float-right btn font-weight-bolder text-uppercase font-size-lg btn-danger py-3 px-6 mt-3 ml-3"
+      @click="exportPDF()"
+    >
+      Print PDF
+    </button>
+    <button
+      class="float-right btn font-weight-bolder text-uppercase font-size-lg btn-primary py-3 px-6 mt-3"
+      @click="exportExcel()"
+    >
+      Print Excel
+    </button>
   </div>
   <div v-else>
     <vue-good-table :columns="columns" :rows="laporanNIK">
@@ -49,6 +64,7 @@
 <script>
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { parseTime } from "@/utils";
 
 export default {
   data() {
@@ -127,20 +143,24 @@ export default {
       this.$router.push(`/Lapor/view/${id}`);
     },
     toAcceptAdmin(id) {
-      this.$swal
-        .fire({
-          title: "Apakah Anda Akan Menangani Laporan?",
-          showCancelButton: true,
-          confirmButtonText: `iya!`,
-          cancelButtonText: `tidak!`,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33"
-        })
-        .then(result => {
-          if (result.isConfirmed) {
-            this.$router.push(`/Lapor/view/${id}`);
-          }
-        });
+      if (this.auth.status == "belum") {
+        this.$swal
+          .fire({
+            title: "Apakah Anda Akan Menangani Laporan?",
+            showCancelButton: true,
+            confirmButtonText: `iya!`,
+            cancelButtonText: `tidak!`,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33"
+          })
+          .then(result => {
+            if (result.isConfirmed) {
+              this.$router.push(`/Lapor/view/${id}`);
+            }
+          });
+      } else {
+        this.$router.push(`/Lapor/view/${id}`);
+      }
     },
     deleteLaporan(id) {
       this.$swal
@@ -183,6 +203,32 @@ export default {
         margin: { top: 60 }
       });
       doc.save("todos.pdf");
+    },
+    exportExcel() {
+      import("@/vendor/Export2Excel").then(excel => {
+        const tHeader = ["Id", "Judul", "isi laporan", "Kategori"];
+        const filterVal = ["id_laporan", "judul", "isi_laporan", "kategori"];
+        const list = this.laporan;
+        const data = this.formatJson(filterVal, list);
+        excel.export_json_to_excel({
+          header: tHeader, //Header Required
+          data, //Specific data Required
+          filename: "excel-list", //Optional
+          autoWidth: true, //Optional
+          bookType: "xlsx" //Optional
+        });
+      });
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v =>
+        filterVal.map(j => {
+          if (j === "timestamp") {
+            return parseTime(v[j]);
+          } else {
+            return v[j];
+          }
+        })
+      );
     }
   }
 };

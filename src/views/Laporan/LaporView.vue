@@ -1,6 +1,5 @@
 <template>
   <div class="row">
-    {{ auth }}
     <div class="col-10 mx-auto">
       <div class="card card-custom gutter-b shadow">
         <div class="card-body p-0">
@@ -13,15 +12,18 @@
                   {{ laporanID.judul }}
                 </h1>
                 <div class="d-flex flex-column align-items-md-end px-0">
-                  <h2 class="text-dark font-weight-bolder mb-8">
+                  <h2 class="text-dark font-weight-bolder mb-2">
                     {{ laporanID.kategori }}
                   </h2>
+                  <h6 class="text-dark mb-4 opacity-90">
+                    {{ laporanID.tgl_laporan }}
+                  </h6>
                   <span
                     class="d-flex flex-column align-items-md-end opacity-70"
                   >
                     <span>
-                      {{ laporanID.kecamatan }}, {{ laporanID.kota }},
-                      {{ laporanID.provinsi }}
+                      {{ laporanID.provinsi }}, {{ laporanID.kota }},
+                      {{ laporanID.kecamatan }}
                     </span>
                     <span>{{ laporanID.status }}</span>
                   </span>

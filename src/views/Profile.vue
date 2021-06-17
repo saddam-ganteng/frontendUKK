@@ -66,7 +66,7 @@
             </div>
             <div class="card-footer py-4">
               <button type="submit" class="btn btn-danger ml-3 float-right">
-                Download PDF
+                Update Profile
               </button>
             </div>
           </div>

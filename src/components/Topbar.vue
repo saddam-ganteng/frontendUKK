@@ -8,8 +8,9 @@
         >
           <span
             class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-3"
-            >{{ auth_level == 1 ? auth.nama : auth.nama_petugas }}</span
           >
+            {{ auth_level == 1 ? auth.nama : auth.nama_petugas }}
+          </span>
           <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
             <span class="symbol-label font-size-h5 font-weight-bold">N</span>
           </span>

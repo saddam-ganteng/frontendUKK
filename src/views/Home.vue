@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="container-fluid">
     <div class="card card-custom overflow-hidden position-relative mb-8">
       <div
         class="position-absolute bottom-0 left-0 right-0 d-none d-lg-flex flex-row-fluid"
@@ -528,7 +528,7 @@
         class="card-body d-flex justify-content-center flex-column col-lg-6 px-8 py-20 px-lg-20 py-lg-40"
       >
         <h2 class="text-dark font-weight-bolder mb-8 py-7 px-8">
-          nanoSTIX Indonesia
+          NGADS Indonesia
         </h2>
       </div>
     </div>
@@ -545,19 +545,19 @@ export default {
     return {};
   },
   computed: {
-    rakyat() {
-      return this.$store.getters["rakyat/rakyat"]
-        ? this.$store.getters["rakyat/rakyat"]
+    auth() {
+      return this.$store.getters["auth/auth"]
+        ? this.$store.getters["auth/auth"]
         : [];
     }
   },
   mounted() {
-    this.getRakyat();
+    // this.getRakyat();
   },
   methods: {
-    getRakyat() {
-      this.$store.dispatch("rakyat/GET_RAKYAT");
-    }
+    // getRakyat() {
+    //   this.$store.dispatch("rakyat/GET_RAKYAT");
+    // }
   }
 };
 </script>

@@ -1,23 +1,5 @@
 <template>
-  <div v-if="cek == false">
-    <div class="topbar auth">
-      <ul class="topbar__breadcrumb">
-        <li class="topbar__breadcrumb__item">
-          Pengaduan Masyarakat
-        </li>
-      </ul>
-      <div class="topbar__profile">
-        <button
-          @click.prevent="modalLogin()"
-          class="btn font-weight-bolder text-uppercase font-size-lg btn-success py-3 px-6"
-        >
-          Sign IN
-        </button>
-      </div>
-    </div>
-    <Modal />
-  </div>
-  <div v-else>
+  <div>
     <div class="topbar">
       <div class="topbar__profile">
         <div
@@ -26,7 +8,7 @@
         >
           <span
             class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-3"
-            >{{ auth.nama }}</span
+            >{{ auth_level == 1 ? auth.nama : auth.nama_petugas }}</span
           >
           <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
             <span class="symbol-label font-size-h5 font-weight-bold">N</span>
@@ -38,20 +20,17 @@
 </template>
 
 <script>
-import Modal from "./Modal.vue";
 export default {
-  components: {
-    Modal
-  },
+  components: {},
   computed: {
-    cek() {
-      return this.$store.getters["auth/auth_status"]
-        ? this.$store.getters["auth/auth_status"]
-        : [];
-    },
     auth() {
       return this.$store.getters["auth/auth"]
         ? this.$store.getters["auth/auth"]
+        : [];
+    },
+    auth_level() {
+      return this.$store.getters["auth/auth_level"]
+        ? this.$store.getters["auth/auth_level"]
         : [];
     }
   },

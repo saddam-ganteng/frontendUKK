@@ -9,7 +9,6 @@
                 <vue-good-table
                   :columns="columns"
                   :rows="barang"
-                  :fixed-header="true"
                   :search-options="{
                     enabled: true
                   }"

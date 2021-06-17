@@ -54,10 +54,12 @@ window.axios = require("axios");
 window.queryString = require("query-string");
 
 // Setup API Endpoint
-window.axios.defaults.baseURL = "http://localhost:3030";
+window.axios.defaults.baseURL = "http://localhost:8000";
 // Setup axios post content type
+// window.axios.defaults.headers.post["Content-Type"] =
+//   "multipart/form-data; boundary=<calculated when request is sent>";
 window.axios.defaults.headers.post["Content-Type"] =
-  "multipart/form-data; boundary=<calculated when request is sent>";
+  "application/x-ww w-form-urlencoded";
 
 const token = store.getters["auth/auth"];
 const auth_status = store.getters["auth/auth_status"];

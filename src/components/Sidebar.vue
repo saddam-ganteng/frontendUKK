@@ -5,10 +5,10 @@
     </div>
     <ul class="sidebar__menu">
       <li id="sidebar-tooltip-channels" class="sidebar__menu__item">
-        <a class="sidebar__menu__link" @click="toHomeAdmin()">
+        <router-link class="sidebar__menu__link" to="/Home">
           <i class="fas fa-database sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Home</span>
-        </a>
+        </router-link>
       </li>
       <!-- <li class="sidebar__menu__item">
         <a class="sidebar__menu__link" @click="toProfile()">
@@ -17,22 +17,16 @@
         </a>
       </li> -->
       <li class="sidebar__menu__item">
-        <a class="sidebar__menu__link" @click="toLaporKu()">
-          <i class="fas fa-envelope sidebar__menu__icon"></i>
+        <router-link class="sidebar__menu__link" to="/Laporan">
+          <i class="fas fa-database sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Laporan</span>
-        </a>
+        </router-link>
       </li>
-      <li class="sidebar__menu__item">
-        <a class="sidebar__menu__link" @click="toPetugas()">
-          <i class="fas fa-envelope sidebar__menu__icon"></i>
-          <span class="sidebar__menu__text">Petugas</span>
-        </a>
-      </li>
-      <li class="sidebar__menu__item">
-        <a class="sidebar__menu__link" @click="toMasyarakat()">
-          <i class="fas fa-envelope sidebar__menu__icon"></i>
-          <span class="sidebar__menu__text">Masyarakat</span>
-        </a>
+      <li id="sidebar-tooltip-channels" class="sidebar__menu__item">
+        <router-link class="sidebar__menu__link" to="/Profile">
+          <i class="fas fa-database sidebar__menu__icon"></i>
+          <span class="sidebar__menu__text">Profile</span>
+        </router-link>
       </li>
     </ul>
     <ul class="sidebar__menu sidebar__menu--secondary">
@@ -49,7 +43,7 @@
     </div>
     <ul class="sidebar__menu">
       <li class="sidebar__menu__item">
-        <router-link class="sidebar__menu__link" to="/">
+        <router-link class="sidebar__menu__link" to="/Home">
           <i class="fas fa-database sidebar__menu__icon"></i>
           <span class="sidebar__menu__text">Home</span>
         </router-link>
@@ -115,7 +109,9 @@ export default {
       this.$router.push({ name: "Masyarakat" });
     },
     Logout() {
-      this.$store.dispatch("auth/LOGOUT");
+      this.$store
+        .dispatch("auth/LOGOUT")
+        .then(() => this.$router.push("/Login"));
     }
   }
 };

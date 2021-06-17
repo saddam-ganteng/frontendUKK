@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-4">
-          <div class="card shadow card-custom gutter-b">
+          <div class="card rounded-xl shadow card-custom gutter-b">
             <div class="card-body text-center pt-4">
               <div class="my-4">
                 <div class="symbol symbol-circle symbol-lg-120">
@@ -14,15 +14,15 @@
                 <span
                   class="text-dark font-weight-bold text-hover-primary font-size-h4"
                 >
-                  Kirim Barang
+                  Kategori
                 </span>
               </div>
               <div class="mt-9">
-                <router-link to="/Barang/Kirim">
+                <router-link to="/Laporan/Kategori">
                   <span
                     class="btn btn-light-primary font-weight-bolder btn-sm py-3 px-6 text-uppercase"
                   >
-                    Kirim
+                    Kategori
                   </span>
                 </router-link>
               </div>
@@ -30,12 +30,34 @@
           </div>
         </div>
         <div class="col-4">
-          <div class="card card-custom gutter-b">
-            asd
+          <div class="card rounded-xl shadow card-custom gutter-b">
+            <div class="card-body text-center pt-4">
+              <div class="my-4">
+                <div class="symbol symbol-circle symbol-lg-120">
+                  <img src="https://via.placeholder.com/150" alt="" />
+                </div>
+              </div>
+              <div class="mt-7">
+                <span
+                  class="text-dark font-weight-bold text-hover-primary font-size-h4"
+                >
+                  Laporan
+                </span>
+              </div>
+              <div class="mt-9">
+                <router-link to="/Laporan/List">
+                  <span
+                    class="btn btn-light-primary font-weight-bolder btn-sm py-3 px-6 text-uppercase"
+                  >
+                    Laporan
+                  </span>
+                </router-link>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-4">
-          <div class="card shadow card-custom gutter-b">
+          <div class="card rounded-xl shadow card-custom gutter-b">
             <div class="card-body text-center pt-4">
               <div class="my-4">
                 <div class="symbol symbol-circle symbol-lg-120">

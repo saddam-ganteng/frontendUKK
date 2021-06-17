@@ -11,7 +11,6 @@
     </div>
   </div>
   <div v-else>
-    <Topbar v-if="!isAdmin" />
     <Auth />
   </div>
 </template>
@@ -26,14 +25,33 @@ export default {
     Sidebar,
     Topbar
   },
+  data() {
+    return {
+      width: window.innerWidth
+    };
+  },
+  created() {
+    window.addEventListener("resize", this.handleWidth);
+  },
+  beforeDestroy() {
+    window.addEventListener("resize", this.handleWidth);
+  },
+  methods: {
+    handleWidth() {
+      this.width = window.innerWidth;
+    }
+  },
   computed: {
     cek() {
       return this.$store.getters["auth/auth_status"]
         ? this.$store.getters["auth/auth_status"]
         : [];
     },
-    isAdmin() {
-      return this.$route.name == "AuthAdmin";
+    isLogin() {
+      return this.$route.name == "AuthLogin";
+    },
+    isRegister() {
+      return this.$route.name == "AuthRegister";
     }
   }
 };

@@ -1,11 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Profile from "../views/Profile.vue";
 import Auth from "../views/Auth/Auth.vue";
 
-import Barang from "../views/Barang/Barang.vue";
-import Kirim from "../views/Barang/Transfer/Kirim.vue";
-import Adjusment from "../views/Barang/Adjusment/Adjusment.vue";
+import Laporan from "../views/Admin/Laporan.vue";
+import Kategori from "../views/Admin/Kategori/Kategori.vue";
+import LaporanList from "../views/Admin/Laporan/LaporanList.vue";
+import LaporanView from "../views/Admin/Laporan/LaporanView.vue";
+import Adjusment from "../views/Admin/Adjusment/Adjusment.vue";
 
 import store from "../store/index";
 
@@ -15,32 +18,44 @@ const isAuthenticated = (to, from, next) => {
   if (store.getters["auth/auth_status"]) {
     return next();
   }
-  return next("/Admin/Login");
+  return next("/Login");
 };
 
 const routes = [
   {
-    path: "/",
+    path: "/Home",
     name: "Home",
     component: Home,
     beforeEnter: isAuthenticated
   },
   {
-    path: "/Admin/Home",
-    name: "HomeAdmin",
-    component: Home,
+    path: "/Profile",
+    name: "Profile",
+    component: Profile,
     beforeEnter: isAuthenticated
   },
   {
-    path: "/Barang",
-    name: "Barang",
-    component: Barang,
+    path: "/Laporan",
+    name: "Laporan",
+    component: Laporan,
     beforeEnter: isAuthenticated
   },
   {
-    path: "/Barang/Kirim",
-    name: "Kirim",
-    component: Kirim,
+    path: "/Laporan/Kategori",
+    name: "Kategori",
+    component: Kategori,
+    beforeEnter: isAuthenticated
+  },
+  {
+    path: "/Laporan/List",
+    name: "LaporanList",
+    component: LaporanList,
+    beforeEnter: isAuthenticated
+  },
+  {
+    path: "/Laporan/View/:id",
+    name: "LaporanView",
+    component: LaporanView,
     beforeEnter: isAuthenticated
   },
   {
@@ -51,25 +66,13 @@ const routes = [
   },
   {
     path: "/Login",
-    name: "Auth",
+    name: "AuthLogin",
     component: Auth
-    // redirect: () => {
-    //   if (store.getters["auth/auth_status"]) {
-    //     return "/";
-    //   }
-    //   return "/login";
-    // }
   },
   {
-    path: "/Admin/Login",
-    name: "AuthAdmin",
+    path: "/Register",
+    name: "AuthRegister",
     component: Auth
-    // redirect: () => {
-    //   if (store.getters["auth/auth_status"]) {
-    //     return "/";
-    //   }
-    //   return "/login";
-    // }
   }
 ];
 

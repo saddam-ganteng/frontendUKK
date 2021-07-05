@@ -11,12 +11,16 @@
                 </label>
                 <input
                   type="text"
+                  required
                   class="form-control form-control-lg"
                   v-model="formKategori.kategori"
                 />
               </div>
               <div>
-                <button class="btn btn-primary btn-lg float-right">
+                <button
+                  @click.prevent="kirimKategori"
+                  class="btn btn-primary btn-lg float-right"
+                >
                   Tambah
                 </button>
               </div>
@@ -33,7 +37,19 @@
                   :rows="kategori"
                   :fixed-header="true"
                   max-height="440px"
-                />
+                >
+                  <template slot="table-row" slot-scope="props">
+                    <span v-if="props.column.field == 'action'">
+                      <b-button
+                        class="btn no-wrap btn-icon btn-sm"
+                        variant="light-danger"
+                        @click.prevent="deleteKategori(props.row.id)"
+                      >
+                        <i class="font-size-12 flaticon2-cross"></i>
+                      </b-button>
+                    </span>
+                  </template>
+                </vue-good-table>
               </div>
             </div>
           </div>
@@ -72,6 +88,9 @@ export default {
         : [];
     }
   },
+  mounted() {
+    this.$store.dispatch("laporan/GET_KATEGORI");
+  },
   methods: {
     kirimKategori() {
       let data = {
@@ -79,21 +98,40 @@ export default {
       };
       this.$swal
         .fire({
-          title: "Apakah Laporan Anda Sudah Benar?",
+          title: "Apakah Kategori Sudah Benar?",
           showCancelButton: true,
-          confirmButtonText: `Sudah, Lapor!`,
+          confirmButtonText: `Sudah!`,
           cancelButtonText: `Belum`
         })
         .then(result => {
           if (result.isConfirmed) {
-            this.$store.dispatch("laporan/ADD_LAPORAN", data).then(() => {
-              this.$store.dispatch("laporan/GET_LAPORAN");
+            this.$store.dispatch("laporan/ADD_KATEGORI", data).then(() => {
+              this.$store.dispatch("laporan/GET_KATEGORI");
             });
-            this.$swal
-              .fire("Terkirim!", "Laporan Anda Sukses", "success")
-              .then(() => {
-                this.$router.push({ name: "Home" });
-              });
+            this.$swal.fire(
+              "Berhasil!",
+              "Kategori Baru Berhasil dibuat",
+              "success"
+            );
+          }
+        });
+    },
+    deleteKategori(id) {
+      this.$swal
+        .fire({
+          title: "Apakah Anda Akan Menghapus Kategori?",
+          showCancelButton: true,
+          confirmButtonText: `iya!`,
+          cancelButtonText: `tidak!`,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6"
+        })
+        .then(result => {
+          if (result.isConfirmed) {
+            this.$store.dispatch("laporan/DELETE_KATEGORI", id).then(() => {
+              this.$store.dispatch("laporan/GET_KATEGORI");
+            });
+            this.$swal.fire("Terhapus!", "Laporan Berhasil Dihapus", "success");
           }
         });
     }

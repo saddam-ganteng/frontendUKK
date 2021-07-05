@@ -10,12 +10,6 @@
           <span class="sidebar__menu__text">Home</span>
         </router-link>
       </li>
-      <!-- <li class="sidebar__menu__item">
-        <a class="sidebar__menu__link" @click="toProfile()">
-          <i class="fas fa-user-alt sidebar__menu__icon"></i>
-          <span class="sidebar__menu__text">Profile</span>
-        </a>
-      </li> -->
       <li class="sidebar__menu__item">
         <router-link class="sidebar__menu__link" to="/Laporan">
           <i class="fas fa-database sidebar__menu__icon"></i>
@@ -48,22 +42,16 @@
           <span class="sidebar__menu__text">Home</span>
         </router-link>
       </li>
-      <!-- <li class="sidebar__menu__item">
-        <a class="sidebar__menu__link" @click="toProfile()">
-          <i class="fas fa-user-alt sidebar__menu__icon"></i>
-          <span class="sidebar__menu__text">Profile</span>
-        </a>
-      </li> -->
       <li class="sidebar__menu__item">
-        <router-link class="sidebar__menu__link" to="/Barang">
-          <i class="fas fa-envelope sidebar__menu__icon"></i>
-          <span class="sidebar__menu__text">Barang</span>
+        <router-link class="sidebar__menu__link" to="/Laporan">
+          <i class="fas fa-database sidebar__menu__icon"></i>
+          <span class="sidebar__menu__text">Laporan</span>
         </router-link>
       </li>
-      <li class="sidebar__menu__item">
-        <router-link class="sidebar__menu__link" to="/Lapor/Ku">
-          <i class="fas fa-envelope-open-text sidebar__menu__icon"></i>
-          <span class="sidebar__menu__text">Laporan Ku</span>
+      <li id="sidebar-tooltip-channels" class="sidebar__menu__item">
+        <router-link class="sidebar__menu__link" to="/Profile">
+          <i class="fas fa-database sidebar__menu__icon"></i>
+          <span class="sidebar__menu__text">Profile</span>
         </router-link>
       </li>
     </ul>

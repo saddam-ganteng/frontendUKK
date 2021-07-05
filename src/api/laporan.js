@@ -32,7 +32,7 @@ export const GET_LAPORAN_ID = id => {
 };
 
 export const GET_LAPORAN_JAKARTA = () => {
-  return axios.get(`/api/lapor/jakarta`);
+  return axios.get(`/api/get/laporan/jakarta`);
 };
 export const GET_LAPORAN_BALI = () => {
   return axios.get(`/api/get/laporan/bali`);
@@ -53,6 +53,9 @@ export const GET_LAPORAN_SULAWESI = () => {
 export const ADD_LAPORAN = body => {
   return axios.post("/api/lapor", body);
 };
+export const ADD_KATEGORI = body => {
+  return axios.post("/api/kategori", body);
+};
 
 export const DONE_LAPORAN = id => {
   return axios.put(`/api/lapor/${id}/selesai`);
@@ -60,6 +63,10 @@ export const DONE_LAPORAN = id => {
 
 export const DELETE_LAPORAN = id => {
   return axios.delete(`/api/lapor/${id}`);
+};
+
+export const DELETE_KATEGORI = id => {
+  return axios.delete(`/api/kategori/${id}`);
 };
 
 export const ADD_TANGGAPAN = body => {

@@ -4,9 +4,11 @@ import {
   GET_KOTA,
   GET_KECAMATAN,
   GET_KATEGORI,
+  ADD_KATEGORI,
   GET_LAPORAN,
   ADD_LAPORAN,
   DELETE_LAPORAN,
+  DELETE_KATEGORI,
   GET_LAPORAN_NIK,
   GET_LAPORAN_ID,
   ADD_TANGGAPAN,
@@ -198,11 +200,22 @@ const actions = {
   ADD_LAPORAN: async ({ commit }, args) => {
     return await ADD_LAPORAN(args)
       .then(resp => {
-        console.log(resp);
+        commit("SET_RESP", resp.data);
       })
       .catch(err => {
         let resp = err.response;
-        console.log(resp);
+        commit("SET_RESP", resp.data);
+      });
+  },
+  // eslint-disable-next-line no-unused-vars
+  ADD_KATEGORI: async ({ commit }, args) => {
+    return await ADD_KATEGORI(args)
+      .then(resp => {
+        commit("SET_RESP", resp.data);
+      })
+      .catch(err => {
+        let resp = err.response;
+        commit("SET_RESP", resp.data);
       });
   },
 
@@ -210,11 +223,11 @@ const actions = {
   DONE_LAPORAN: async ({ commit }, args) => {
     return await DONE_LAPORAN(args)
       .then(resp => {
-        console.log(resp);
+        commit("SET_RESP", resp.data);
       })
       .catch(err => {
         let resp = err.response;
-        console.log(resp);
+        commit("SET_RESP", resp.data);
       });
   },
 
@@ -222,11 +235,11 @@ const actions = {
   ADD_TANGGAPAN: async ({ commit }, args) => {
     return await ADD_TANGGAPAN(args)
       .then(resp => {
-        console.log(resp);
+        commit("SET_RESP", resp.data);
       })
       .catch(err => {
         let resp = err.response;
-        console.log(resp);
+        commit("SET_RESP", resp.data);
       });
   },
 
@@ -249,6 +262,10 @@ const actions = {
   // eslint-disable-next-line no-unused-vars
   DELETE_LAPORAN: ({ commit }, args) => {
     return DELETE_LAPORAN(args);
+  },
+  // eslint-disable-next-line no-unused-vars
+  DELETE_KATEGORI: ({ commit }, args) => {
+    return DELETE_KATEGORI(args);
   },
 
   GET_LAPORAN_JAKARTA: async ({ commit }) => {

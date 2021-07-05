@@ -6,7 +6,7 @@
       >
         <span
           class="svg-icon svg-icon-full flex-row-fluid svg-icon-dark opacity-3"
-          ><!--begin::Svg Icon | path:assets/media/bg/home-2-bg.svg--><svg
+          ><svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             version="1.1"
@@ -24,8 +24,7 @@
               class="st0"
               d="M0,87c0,0,16-14,73-14s153,92,248,92S607,20,777,20s183,34,292,34s131-54,131-54v172H0V87z"
             /></svg
-          ><!--end::Svg Icon--></span
-        >
+        ></span>
       </div>
       <div
         class="position-absolute d-flex top-0 right-0 offset-lg-5 col-lg-7 opacity-30 opacity-lg-100"
@@ -530,6 +529,7 @@
         <h2 class="text-dark font-weight-bolder mb-8 py-7 px-8">
           NGADS Indonesia
         </h2>
+        {{ auth_token }}
       </div>
     </div>
   </div>
@@ -545,9 +545,9 @@ export default {
     return {};
   },
   computed: {
-    auth() {
-      return this.$store.getters["auth/auth"]
-        ? this.$store.getters["auth/auth"]
+    auth_token() {
+      return this.$store.getters["auth/auth_token"]
+        ? this.$store.getters["auth/auth_token"]
         : [];
     }
   },

@@ -196,7 +196,7 @@ export default {
       this.$store
         .dispatch("auth/LOGIN_RAKYAT", this.form)
         .then(() => {
-          this.$router.push("/").then(() =>
+          this.$router.push("/Home").then(() =>
             this.$swal.fire({
               toast: true,
               position: "top-end",

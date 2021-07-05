@@ -6,10 +6,16 @@
           <div class="card rounded shadow card-custom gutter-b">
             <div class="card-body">
               <div class="form-group">
-                <button type="submit" class="btn btn-danger ml-3 float-right">
+                <button
+                  @click="exportPDF()"
+                  class="btn btn-danger ml-3 float-right"
+                >
                   Download PDF
                 </button>
-                <button type="submit" class="btn btn-primary float-right">
+                <button
+                  @click="exportExcel()"
+                  class="btn btn-primary float-right"
+                >
                   Download Excel
                 </button>
                 <form class="form-inline">
@@ -20,7 +26,8 @@
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="default Laporan.xlm"
+                      placeholder="default Laporan.xlsx"
+                      v-model="filename"
                     />
                   </div>
                 </form>
@@ -62,6 +69,10 @@
 </template>
 
 <script>
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { parseTime } from "@/utils";
+
 export default {
   data() {
     return {
@@ -100,7 +111,8 @@ export default {
       ],
       formKategori: {
         kategori: ""
-      }
+      },
+      filename: ""
     };
   },
   computed: {
@@ -113,6 +125,57 @@ export default {
   methods: {
     toAcceptLaporan(id) {
       this.$router.push(`/Laporan/View/${id}`);
+    },
+    exportPDF() {
+      if (this.filename == "") {
+        this.filename = "Laporan";
+      }
+      var vm = this;
+      var columns = [
+        { title: "Judul", dataKey: "judul" },
+        { title: "isi laporan", dataKey: "isi_laporan" },
+        { title: "Kategori", dataKey: "kategori" },
+        { title: "Provinsi", dataKey: "provinsi" },
+        { title: "Kota", dataKey: "kota" },
+        { title: "Kecamatan", dataKey: "kecamatan" },
+        { title: "Status", dataKey: "status" },
+        { title: "Tanggal laporan", dataKey: "tgl_laporan" }
+      ];
+      var doc = new jsPDF("p", "pt");
+      doc.text("Laporan Masyarakat", 40, 40);
+      doc.autoTable(columns, vm.laporan, {
+        margin: { top: 60 }
+      });
+      doc.save(this.filename);
+    },
+    exportExcel() {
+      if (this.filename == "") {
+        this.filename = "Laporan";
+      }
+      import("@/vendor/Export2Excel").then(excel => {
+        const tHeader = ["Id", "Judul", "isi laporan", "Kategori"];
+        const filterVal = ["id_laporan", "judul", "isi_laporan", "kategori"];
+        const list = this.laporan;
+        const data = this.formatJson(filterVal, list);
+        excel.export_json_to_excel({
+          header: tHeader, //Header Required
+          data, //Specific data Required
+          filename: this.filename, //Optional
+          autoWidth: true, //Optional
+          bookType: "xlsx" //Optional
+        });
+      });
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v =>
+        filterVal.map(j => {
+          if (j === "timestamp") {
+            return parseTime(v[j]);
+          } else {
+            return v[j];
+          }
+        })
+      );
     }
   },
   mounted() {

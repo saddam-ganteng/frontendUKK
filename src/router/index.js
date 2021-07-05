@@ -8,7 +8,8 @@ import Laporan from "../views/Admin/Laporan.vue";
 import Kategori from "../views/Admin/Kategori/Kategori.vue";
 import LaporanList from "../views/Admin/Laporan/LaporanList.vue";
 import LaporanView from "../views/Admin/Laporan/LaporanView.vue";
-import Adjusment from "../views/Admin/Adjusment/Adjusment.vue";
+import LaporanAdd from "../views/Rakyat/LaporanAdd.vue";
+import LaporanListID from "../views/Rakyat/LaporanListID.vue";
 
 import store from "../store/index";
 
@@ -53,20 +54,31 @@ const routes = [
     beforeEnter: isAuthenticated
   },
   {
+    path: "/Laporan/Add",
+    name: "LaporanAdd",
+    component: LaporanAdd,
+    beforeEnter: isAuthenticated
+  },
+  {
     path: "/Laporan/View/:id",
     name: "LaporanView",
     component: LaporanView,
     beforeEnter: isAuthenticated
   },
   {
-    path: "/Barang/Adjusment",
-    name: "Adjusment",
-    component: Adjusment,
+    path: "/Laporan/Ku",
+    name: "LaporanListID",
+    component: LaporanListID,
     beforeEnter: isAuthenticated
   },
   {
     path: "/Login",
-    name: "AuthLogin",
+    name: "AuthLoginAdmin",
+    component: Auth
+  },
+  {
+    path: "/Landing",
+    name: "AuthLoginRakyat",
     component: Auth
   },
   {

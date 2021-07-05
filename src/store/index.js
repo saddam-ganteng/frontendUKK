@@ -4,6 +4,7 @@ import auth from "./modules/auth";
 import barang from "./modules/barang";
 import laporan from "./modules/laporan";
 import rakyat from "./modules/rakyat";
+import petugas from "./modules/petugas";
 
 import createPersistedState from "vuex-persistedstate";
 
@@ -14,15 +15,14 @@ export default new Vuex.Store({
     auth,
     barang,
     laporan,
-    rakyat
+    rakyat,
+    petugas
   },
   plugins: [
     createPersistedState({
       key: "token",
       reducer: state => ({
-        auth: state.auth,
-        laporan: state.laporan,
-        rakyat: state.rakyat
+        auth: state.auth
       })
     })
   ]

@@ -1,11 +1,12 @@
 import axios from "axios";
-import { LOGIN, LOGIN_ADMIN, REGISTER_RAKYAT } from "../../api/auth";
+import { LOGIN, LOGIN_PETUGAS, REGISTER_RAKYAT, PETUGAS } from "../../api/auth";
 
 const state = {
   resp: null,
-  auth: null,
+  auth_token: null,
   auth_status: false,
-  auth_level: null
+  auth_level: null,
+  auth: null
 };
 
 const mutations = {
@@ -18,15 +19,18 @@ const mutations = {
     states.auth_level = 1;
     axios.defaults.headers.common["Authorization"] = payload.data.token;
   },
-  SET_LOGIN_ADMIN: (states, payload) => {
-    states.auth = payload.data;
+  SET_LOGIN_PETUGAS: (states, payload) => {
+    states.auth_token = payload.data;
     states.auth_status = true;
     states.auth_level = 2;
     axios.defaults.headers.common["Authorization"] = payload.data.token;
   },
+  SET_PETUGAS: (states, payload) => {
+    states.auth = payload.data;
+  },
   SET_LOGOUT: states => {
+    states.auth_token = null;
     states.auth_status = false;
-    states.auth = null;
     states.auth_level = null;
     axios.defaults.headers.common["Authorization"] = null;
   }
@@ -47,15 +51,16 @@ const actions = {
         return true;
       });
   },
-  LOGIN_ADMIN: ({ commit }, args) => {
-    return LOGIN_ADMIN(args)
+  LOGIN_PETUGAS: ({ commit }, args) => {
+    return LOGIN_PETUGAS(args)
       .then(res => {
         let data = res.data;
-        commit("SET_LOGIN_ADMIN", data);
+        commit("SET_RESP", data.code);
+        commit("SET_LOGIN_PETUGAS", data);
         return true;
       })
       .catch(err => {
-        // console.log("Error while login", err);
+        console.log("Error while login", err);
         localStorage.removeItem("token");
         commit("SET_RESP", err.response);
         return true;
@@ -74,6 +79,23 @@ const actions = {
       });
   },
 
+  PETUGAS: async ({ commit }, token) => {
+    // console.log(id, "ini store");
+    return await PETUGAS(token)
+      .then(resp => {
+        if (resp.status === 200) {
+          // console.log(resp.data);
+          commit("SET_PETUGAS", resp.data);
+        }
+      })
+      .catch(err => {
+        let resp = err.response;
+        if (resp.status === 404) {
+          commit("SET_PETUGAS", []);
+        }
+      });
+  },
+
   LOGOUT: ({ commit }) => {
     commit("SET_LOGOUT");
     localStorage.removeItem("token");
@@ -82,6 +104,7 @@ const actions = {
 
 const getters = {
   auth: states => states.auth,
+  auth_token: states => states.auth_token,
   auth_status: states => states.auth_status,
   auth_level: states => states.auth_level,
   resp: states => states.resp
